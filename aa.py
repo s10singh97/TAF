@@ -18,18 +18,24 @@ import warnings
 def getplace(lat, lon):
     url = "http://maps.googleapis.com/maps/api/geocode/json?"
     url += "latlng=%s,%s&sensor=false" % (lat, lon)
-    v = urlopen(url).read()
-    j = json.loads(v)
-    components = j['results'][0]['formatted_address']
-    # country = town = None
-    # for c in components:
-    #     if "country" in c['types']:
-    #         country = c['long_name']
-    #     if "postal_town" in c['types']:
-    #         town = c['long_name']
-    # print(town)
-    # print(country)
-    print(components)
+    try:
+        # connection = urlopen(url)
+        # print(connection.getcode())
+        v = urlopen(url).read()
+        j = json.loads(v)
+        components = j['results'][0]['formatted_address']
+        # country = town = None
+        # for c in components:
+        #     if "country" in c['types']:
+        #         country = c['long_name']
+        #     if "postal_town" in c['types']:
+        #         town = c['long_name']
+        # print(town)
+        # print(country)
+        print(components)
+    except:
+        print("An Error occured")
+
 
 dd = read_csv("Data.csv", header=0, sep=";")
 X = dd[["year"]]
