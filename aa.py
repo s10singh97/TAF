@@ -5,36 +5,20 @@ from urllib.request import urlopen
 import json
 import warnings
 
-# def API(latitude, longitude):
-#     API_KEY = "API Key goes here"
-#     google_places = GooglePlaces(API_KEY)
-#     coordinates = {'lat': latitude, 'lng': longitude}
-#     query_result = google_places.nearby_search(lat_lng=coordinates)
-#     if query_result.has_attributions:
-#         print("yes")
-#     else:
-#         print("no")
-
 def getplace(lat, lon):
     url = "http://maps.googleapis.com/maps/api/geocode/json?"
     url += "latlng=%s,%s&sensor=false" % (lat, lon)
-    try:
-        # connection = urlopen(url)
-        # print(connection.getcode())
-        v = urlopen(url).read()
-        j = json.loads(v)
-        components = j['results'][0]['formatted_address']
-        # country = town = None
-        # for c in components:
-        #     if "country" in c['types']:
-        #         country = c['long_name']
-        #     if "postal_town" in c['types']:
-        #         town = c['long_name']
-        # print(town)
-        # print(country)
-        print(components)
-    except:
-        print("An Error occured")
+    while True:
+        try:
+            v = urlopen(url).read()
+            j = json.loads(v)
+            components = j['results'][0]['formatted_address']
+            flag = 0        # Successful data transfer in components 
+            print(components)
+        except:
+            flag = 1        # Unsuccessful data transfer in components
+        if flag == 0:
+            break
 
 
 dd = read_csv("Data.csv", header=0, sep=";")
