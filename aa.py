@@ -32,25 +32,31 @@ models = [('BayesianRidge', linear_model.BayesianRidge()),
     ('ARDRegression', linear_model.ARDRegression())]
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
-    c = 1
+    year_input = input("Enter year for prediction of Terrorist attacks : ")
+    year_input = float(year_input)
     for name,i in models:
         print("\n", name)
         print("===========================================")
         clf = i
         clf.fit(X, y1)
-        lat = clf.predict(2018)
+        lat = clf.predict(year_input)
         for i in lat:
             new_lat = float("{0:.6f}".format(i))
         print("Latitude : ", new_lat)
         clf.fit(X, y2)
-        lng = clf.predict(2018)
+        lng = clf.predict(year_input)
         for i in lng:
             new_lng = float("{0:.6f}".format(i))
         print("Longitude : ", new_lng)
         clf.fit(X, y3)
-        print("Date : ", clf.predict(2018))
+        date = clf.predict(year_input)
+        for i in date:
+            dte = int(i)
+        print("Date : ", dte)
         clf.fit(X, y4)
-        print("Month : ", clf.predict(2018))
+        month = clf.predict(year_input)
+        for i in month:
+            mnt = int(i)
+        print("Month : ", mnt)
         print("Place deduced from latitude and longitude : \n========")
         getplace(new_lat, new_lng)
-        c += 1
