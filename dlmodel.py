@@ -77,4 +77,30 @@ def lng():
     return y_pred2
 
 latitude = lat()
+latitude = latitude.tolist()
+for i in latitude:
+    latitude = i
 longitude = lng()
+longitude = longitude.tolist()
+for i in longitude:
+    longitude = i
+    
+from urllib.request import urlopen
+import json
+
+def getplace(lat, lon):
+    url = "http://maps.googleapis.com/maps/api/geocode/json?"
+    url += "latlng=%s,%s&sensor=false" % (lat, lon)
+    while True:
+        try:
+            v = urlopen(url).read()
+            j = json.loads(v)
+            components = j['results'][0]['formatted_address']
+            flag = 0        # Successful data transfer in components 
+            print(components)
+        except:
+            flag = 1        # Unsuccessful data transfer in components
+        if flag == 0:
+            break
+        
+getplace(latitude, longitude)
