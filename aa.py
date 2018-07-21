@@ -1,6 +1,6 @@
 from pandas import read_csv
 from sklearn import linear_model
-from googleplaces import GooglePlaces
+#from googleplaces import GooglePlaces
 from urllib.request import urlopen
 import json
 import warnings

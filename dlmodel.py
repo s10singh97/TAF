@@ -42,7 +42,7 @@ def lat():
     regressor.add(Dense(units = 1))
     regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
     # Fitting the RNN to the training set
-    regressor.fit(X_train1, y_train1, batch_size = 32, epochs = 200)
+    regressor.fit(X_train1, y_train1, batch_size = 32, epochs = 100)
     
     input_val = sc1.transform(2018)
     input_val = np.reshape(input_val, (input_val.shape[0], input_val.shape[1], 1))
@@ -68,7 +68,7 @@ def lng():
     regressor.add(Dense(units = 1))
     regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
     # Fitting the RNN to the training set
-    regressor.fit(X_train2, y_train2, batch_size = 32, epochs = 200)
+    regressor.fit(X_train2, y_train2, batch_size = 32, epochs = 100)
     
     input_val = sc2.transform(2018)
     input_val = np.reshape(input_val, (input_val.shape[0], input_val.shape[1], 1))
@@ -80,11 +80,15 @@ latitude = lat()
 latitude = latitude.tolist()
 for i in latitude:
     latitude = i
+for i in latitude:
+    latitude = float("{0:.6f}".format(i))
 longitude = lng()
 longitude = longitude.tolist()
 for i in longitude:
     longitude = i
-    
+for i in longitude:
+    longitude = float("{0:.6f}".format(i))
+
 from urllib.request import urlopen
 import json
 
